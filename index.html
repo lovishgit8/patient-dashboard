@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - Patient Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>MedCare</h1>
+            </div>
+            
+            <nav class="main-menu">
+                <ul>
+                    <li class="active"><a href="/index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="/prescription.html"><i class="fas fa-prescription-bottle-alt"></i> Prescriptions</a></li>
+                    <li><a href="/medical-test.html"><i class="fas fa-flask"></i> Medical Tests</a></li>
+                    <li><a href="/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="#messages"><i class="fas fa-comment-medical"></i> Messages</a></li>
+                    <li><a href="#health-record"><i class="fas fa-file-medical"></i> Health Record</a></li>
+                    <li><a href="#community"><i class="fas fa-users"></i> Community</a></li>
+                </ul>
+            </nav>
+            
+            <nav class="secondary-menu">
+                <ul>
+                    <li><a href="#referrals"><i class="fas fa-user-md"></i> Referrals</a></li>
+                    <li><a href="#help"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="subscription-alert">
+                <p><i class="fas fa-exclamation-circle"></i> Your subscription will expire soon...</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="user-profile">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-info">
+                        <img src="assets/images/user-avatar.jpg" alt="User Avatar">
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-area">
+                <!-- Health Snapshot Section -->
+                <section class="health-snapshot">
+                    <h2>Health Snapshot</h2>
+                    <div class="cards-container">
+                        <div class="card">
+                            <h3>Current Medications</h3>
+                            <ul class="medications-list">
+                                <li>
+                                    <span class="med-name">Velaula E8 75mg</span>
+                                    <span class="med-dosage">1 tablet daily</span>
+                                    <span class="med-prescriber">Dr. Emma Silver</span>
+                                </li>
+                                <li>
+                                    <span class="med-name">Metformin 500mg</span>
+                                    <span class="med-dosage">2 tablets daily</span>
+                                    <span class="med-prescriber">Dr. Nick Brown</span>
+                                </li>
+                            </ul>
+                            <button class="btn view-all">View All Medications</button>
+                        </div>
+                        
+                        <div class="card">
+                            <h3>Upcoming Appointments</h3>
+                            <div class="appointment-item">
+                                <div class="appointment-details">
+                                    <span class="appointment-date">Feb 30, 2024</span>
+                                    <span class="appointment-time">12:30 PM</span>
+                                    <span class="appointment-doctor">Dr. Dominic Bradley</span>
+                                    <span class="appointment-specialty">Cardiology</span>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn-icon"><i class="fas fa-calendar-plus"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-video"></i></button>
+                                </div>
+                            </div>
+                            <button class="btn view-all">View All Appointments</button>
+                        </div>
+                        
+                        <div class="card vitals-card">
+                            <h3>Recent Vitals</h3>
+                            <div class="vitals-grid">
+                                <div class="vital-item">
+                                    <span class="vital-label">Blood Glucose</span>
+                                    <span class="vital-value">4.7 mmol/L</span>
+                                    <span class="vital-date">21 Jan 2024</span>
+                                </div>
+                                <div class="vital-item">
+                                    <span class="vital-label">Heart Rate</span>
+                                    <span class="vital-value">79 bpm</span>
+                                    <span class="vital-date">21 Jan 2024</span>
+                                </div>
+                                <div class="vital-item">
+                                    <span class="vital-label">Blood Pressure</span>
+                                    <span class="vital-value">120/80 mmHg</span>
+                                    <span class="vital-date">15 Jan 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Test Results Section -->
+                <section class="test-results">
+                    <div class="section-header">
+                        <h2>Test Results</h2>
+                        <button class="btn">View All</button>
+                    </div>
+                    <div class="results-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Test ID</th>
+                                    <th>Test Name</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JYT194536</td>
+                                    <td>Heart Wake Ultrasound</td>
+                                    <td>15 Jan 2024</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>KLP203712</td>
+                                    <td>Blood Panel</td>
+                                    <td>10 Jan 2024</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Messages Section -->
+                <section class="messages-section">
+                    <div class="section-header">
+                        <h2>Messages</h2>
+                        <button class="btn">View All</button>
+                    </div>
+                    <div class="messages-list">
+                        <div class="message-item">
+                            <div class="message-sender">
+                                <img src="assets/images/doctor1.jpg" alt="Dr. Smith">
+                                <span>Dr. Nick Brown</span>
+                            </div>
+                            <div class="message-preview">
+                                <p>Your recent test results look good. Let's discuss them at your next appointment.</p>
+                                <span class="message-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-sender">
+                                <img src="assets/images/nurse1.jpg" alt="Nurse Johnson">
+                                <span>Nurse Johnson</span>
+                            </div>
+                            <div class="message-preview">
+                                <p>Please remember to fast for 12 hours before your blood test tomorrow.</p>
+                                <span class="message-time">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Health Record Section -->
+                <section class="health-record">
+                    <div class="section-header">
+                        <h2>Health History</h2>
+                        <button class="btn">View Full History</button>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-content">
+                                <h3>Annual Checkup</h3>
+                                <p>Routine physical examination. All results within normal range.</p>
+                                <div class="timeline-actions">
+                                    <button class="btn-small">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2022</div>
+                            <div class="timeline-content">
+                                <h3>Influenza</h3>
+                                <p>Diagnosed with seasonal flu. Prescribed Tamiflu and rest.</p>
+                                <div class="timeline-actions">
+                                    <button class="btn-small">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Care Team Section -->
+                <section class="care-team">
+                    <div class="section-header">
+                        <h2>Your Care Team</h2>
+                        <button class="btn">View All</button>
+                    </div>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <img src="assets/images/doctor2.jpg" alt="Dr. Anna Lopez">
+                            <h3>Dr. Anna Lopez</h3>
+                            <p>Physical Therapist</p>
+                            <button class="btn-small">Contact</button>
+                        </div>
+                        <div class="team-member">
+                            <img src="assets/images/doctor3.jpg" alt="Dr. Chramlin Dougie">
+                            <h3>Dr. Chramlin Dougie</h3>
+                            <p>Family Medicine</p>
+                            <button class="btn-small">Contact</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
