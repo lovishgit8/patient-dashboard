@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - Appointments</title>
+    <link rel="stylesheet" href="css/appointments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>MedCare</h1>
+            </div>
+            <nav class="main-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="prescriptions.html"><i class="fas fa-prescription-bottle-alt"></i> Prescriptions</a></li>
+                    <li><a href="medical-tests.html"><i class="fas fa-flask"></i> Medical Tests</a></li>
+                    <li class="active"><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="messages.html"><i class="fas fa-comment-medical"></i> Messages</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search appointments...">
+                </div>
+                <div class="user-profile">
+                    <img src="assets/images/user-avatar.jpg" alt="User Avatar">
+                    <span>John Doe</span>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <div class="appointments-header">
+                    <h1>Appointment Management</h1>
+                    <button class="btn btn-primary" id="new-appointment-btn">
+                        <i class="fas fa-plus"></i> New Appointment
+                    </button>
+                </div>
+
+                <div class="appointment-views">
+                    <div class="view-tabs">
+                        <button class="tab-btn active" data-view="upcoming">Upcoming</button>
+                        <button class="tab-btn" data-view="past">Past</button>
+                        <button class="tab-btn" data-view="calendar">Calendar</button>
+                    </div>
+
+                    <div class="view-content">
+                        <!-- Upcoming Appointments View -->
+                        <div class="view-pane active" id="upcoming-view">
+                            <div class="appointment-cards">
+                                <!-- Cards will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Past Appointments View -->
+                        <div class="view-pane" id="past-view">
+                            <div class="appointments-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Doctor</th>
+                                            <th>Specialty</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Table rows will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Calendar View -->
+                        <div class="view-pane" id="calendar-view">
+                            <div class="calendar-header">
+                                <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                                <h3 id="current-month">November 2023</h3>
+                                <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                            <div class="calendar-grid">
+                                <div class="calendar-weekdays">
+                                    <div>Sun</div>
+                                    <div>Mon</div>
+                                    <div>Tue</div>
+                                    <div>Wed</div>
+                                    <div>Thu</div>
+                                    <div>Fri</div>
+                                    <div>Sat</div>
+                                </div>
+                                <div class="calendar-days" id="calendar-days">
+                                    <!-- Calendar days will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Appointment Modal -->
+    <div class="modal" id="new-appointment-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Schedule New Appointment</h2>
+            <form id="new-appointment-form">
+                <div class="form-group">
+                    <label for="appointment-type">Appointment Type</label>
+                    <select id="appointment-type" required>
+                        <option value="">Select type</option>
+                        <option value="consultation">Consultation</option>
+                        <option value="follow-up">Follow-up</option>
+                        <option value="checkup">Checkup</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointment-doctor">Doctor</label>
+                    <select id="appointment-doctor" required>
+                        <option value="">Select doctor</option>
+                        <option value="dr-smith">Dr. Smith (Cardiology)</option>
+                        <option value="dr-johnson">Dr. Johnson (Primary Care)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointment-date">Date</label>
+                    <input type="text" id="appointment-date" placeholder="Select date" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointment-time">Time</label>
+                    <select id="appointment-time" required>
+                        <option value="">Select time</option>
+                        <!-- Will be populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointment-reason">Reason</label>
+                    <textarea id="appointment-reason" placeholder="Briefly describe the reason for your visit"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Schedule</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Appointment Details Modal -->
+    <div class="modal" id="appointment-details-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Appointment Details</h2>
+            <div class="appointment-details">
+                <div class="detail-row">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value" id="detail-date">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Time:</span>
+                    <span class="detail-value" id="detail-time">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Doctor:</span>
+                    <span class="detail-value" id="detail-doctor">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Type:</span>
+                    <span class="detail-value" id="detail-type">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value" id="detail-status">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Reason:</span>
+                    <span class="detail-value" id="detail-reason">-</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="cancel-appointment-btn">Cancel Appointment</button>
+                <button class="btn btn-primary" id="reschedule-appointment-btn">Reschedule</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/appointments.js"></script>
+</body>
+</html>
