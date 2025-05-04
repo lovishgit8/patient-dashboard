@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - Medical Tests</title>
+    <link rel="stylesheet" href="css/medical-tests.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>MedCare</h1>
+            </div>
+            
+            <nav class="main-menu">
+                <ul>
+                    <li><a href="/index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="/prescription.html"><i class="fas fa-prescription-bottle-alt"></i> Prescriptions</a></li>
+                    <li class="active"><a href="/medical-test.html"><i class="fas fa-flask"></i> Medical Tests</a></li>
+                    <li><a href="/appointment.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="messages.html"><i class="fas fa-comment-medical"></i> Messages</a></li>
+                </ul>
+            </nav>
+            
+            <nav class="secondary-menu">
+                <ul>
+                    <li><a href="#referrals"><i class="fas fa-user-md"></i> Referrals</a></li>
+                    <li><a href="#help"><i class="fas fa-question-circle"></i> Help</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search tests...">
+                </div>
+                <div class="user-profile">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">1</span>
+                    </div>
+                    <div class="user-info">
+                        <img src="assets/images/user-avatar.jpg" alt="User Avatar">
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Medical Tests Content -->
+            <div class="content-area">
+                <div class="tests-header">
+                    <h1>Medical Test Results</h1>
+                    <div class="filter-options">
+                        <div class="filter-group">
+                            <label for="test-type-filter">Test Type:</label>
+                            <select id="test-type-filter">
+                                <option value="all">All Tests</option>
+                                <option value="blood">Blood Tests</option>
+                                <option value="imaging">Imaging</option>
+                                <option value="urine">Urine Tests</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="time-filter">Time Period:</label>
+                            <select id="time-filter">
+                                <option value="all">All Time</option>
+                                <option value="year">Past Year</option>
+                                <option value="month">Past Month</option>
+                                <option value="week">Past Week</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="new-test-btn">
+                            <i class="fas fa-plus"></i> Request New Test
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Test Results Summary -->
+                <section class="test-summary">
+                    <h2>Test Results Overview</h2>
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-vial"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3>Blood Tests</h3>
+                                <p class="summary-value">12</p>
+                                <p class="summary-change positive">
+                                    <i class="fas fa-arrow-up"></i> 2 since last month
+                                </p>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-x-ray"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3>Imaging Tests</h3>
+                                <p class="summary-value">5</p>
+                                <p class="summary-change neutral">
+                                    <i class="fas fa-minus"></i> No change
+                                </p>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3>Urine Tests</h3>
+                                <p class="summary-value">8</p>
+                                <p class="summary-change negative">
+                                    <i class="fas fa-arrow-down"></i> 1 since last month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Test Results Charts -->
+                <section class="test-charts">
+                    <div class="chart-container">
+                        <canvas id="tests-timeline-chart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="test-types-chart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Recent Test Results -->
+                <section class="recent-tests">
+                    <div class="section-header">
+                        <h2>Recent Test Results</h2>
+                        <button class="btn btn-outline">View All Results</button>
+                    </div>
+                    <div class="test-results-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Test ID</th>
+                                    <th>Test Name</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Result</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>BT2023-0456</td>
+                                    <td>Complete Blood Count</td>
+                                    <td>Nov 15, 2023</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td><span class="result normal">Normal</span></td>
+                                    <td>
+                                        <button class="btn-icon view-test-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon download-btn"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>IMG2023-0789</td>
+                                    <td>X-Ray Chest PA View</td>
+                                    <td>Nov 10, 2023</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td><span class="result normal">Normal</span></td>
+                                    <td>
+                                        <button class="btn-icon view-test-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon download-btn"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>BT2023-0455</td>
+                                    <td>Lipid Profile</td>
+                                    <td>Nov 5, 2023</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td><span class="result abnormal">Abnormal</span></td>
+                                    <td>
+                                        <button class="btn-icon view-test-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon download-btn"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>UT2023-0321</td>
+                                    <td>Urinalysis</td>
+                                    <td>Nov 1, 2023</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td><span class="result normal">Normal</span></td>
+                                    <td>
+                                        <button class="btn-icon view-test-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon download-btn"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>BT2023-0444</td>
+                                    <td>HbA1c</td>
+                                    <td>Oct 25, 2023</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td><span class="result critical">Critical</span></td>
+                                    <td>
+                                        <button class="btn-icon view-test-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon download-btn"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Upcoming Tests -->
+                <section class="upcoming-tests">
+                    <div class="section-header">
+                        <h2>Upcoming Tests</h2>
+                        <button class="btn btn-outline">View All Scheduled</button>
+                    </div>
+                    <div class="upcoming-cards">
+                        <div class="upcoming-card">
+                            <div class="upcoming-test-info">
+                                <h3>MRI Brain</h3>
+                                <p class="test-date"><i class="fas fa-calendar-alt"></i> Nov 30, 2023 - 10:00 AM</p>
+                                <p class="test-location"><i class="fas fa-map-marker-alt"></i> City Imaging Center</p>
+                                <p class="test-instructions"><i class="fas fa-info-circle"></i> Fast for 6 hours before test</p>
+                            </div>
+                            <div class="upcoming-test-actions">
+                                <button class="btn btn-outline"><i class="fas fa-calendar-plus"></i> Add to Calendar</button>
+                                <button class="btn btn-outline"><i class="fas fa-directions"></i> Get Directions</button>
+                            </div>
+                        </div>
+                        <div class="upcoming-card">
+                            <div class="upcoming-test-info">
+                                <h3>Fasting Blood Sugar</h3>
+                                <p class="test-date"><i class="fas fa-calendar-alt"></i> Dec 5, 2023 - 8:00 AM</p>
+                                <p class="test-location"><i class="fas fa-map-marker-alt"></i> Main Hospital Lab</p>
+                                <p class="test-instructions"><i class="fas fa-info-circle"></i> Fast for 12 hours before test</p>
+                            </div>
+                            <div class="upcoming-test-actions">
+                                <button class="btn btn-outline"><i class="fas fa-calendar-plus"></i> Add to Calendar</button>
+                                <button class="btn btn-outline"><i class="fas fa-directions"></i> Get Directions</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Test Details Modal -->
+                <div class="modal" id="test-details-modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2 id="modal-test-name">Test Details</h2>
+                        <div class="modal-body">
+                            <div class="modal-test-info">
+                                <div class="info-row">
+                                    <span class="info-label">Test ID:</span>
+                                    <span class="info-value" id="modal-test-id">-</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Test Date:</span>
+                                    <span class="info-value" id="modal-test-date">-</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Ordered By:</span>
+                                    <span class="info-value" id="modal-test-doctor">-</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Test Location:</span>
+                                    <span class="info-value" id="modal-test-location">-</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Status:</span>
+                                    <span class="info-value" id="modal-test-status">-</span>
+                                </div>
+                            </div>
+                            
+                            <div class="modal-test-results">
+                                <h3>Results</h3>
+                                <div class="results-table" id="modal-results-table">
+                                    <!-- Results will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <div class="modal-test-notes">
+                                <h3>Doctor's Notes</h3>
+                                <p id="modal-test-notes">No additional notes provided.</p>
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn btn-outline close-modal-btn">Close</button>
+                            <button class="btn btn-primary download-results-btn">
+                                <i class="fas fa-download"></i> Download Full Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Test Request Modal -->
+                <div class="modal" id="new-test-modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2>Request New Medical Test</h2>
+                        <form id="new-test-form">
+                            <div class="form-group">
+                                <label for="test-type">Test Type</label>
+                                <select id="test-type" required>
+                                    <option value="">Select test type</option>
+                                    <option value="blood">Blood Test</option>
+                                    <option value="imaging">Imaging Test</option>
+                                    <option value="urine">Urine Test</option>
+                                    <option value="other">Other Test</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="specific-test">Specific Test</label>
+                                <select id="specific-test" required>
+                                    <option value="">Select specific test</option>
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="test-reason">Reason for Test</label>
+                                <textarea id="test-reason" placeholder="Explain why you need this test" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="test-doctor">Requesting Doctor</label>
+                                <select id="test-doctor" required>
+                                    <option value="">Select doctor</option>
+                                    <option value="1">Dr. Emma Silver</option>
+                                    <option value="2">Dr. Nick Brown</option>
+                                    <option value="3">Dr. Anna Lopez</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="test-preference">Testing Preference</label>
+                                <select id="test-preference" required>
+                                    <option value="">Select preference</option>
+                                    <option value="asap">As soon as possible</option>
+                                    <option value="next-visit">During next visit</option>
+                                    <option value="specific">Specific date</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="specific-date-group" style="display: none;">
+                                <label for="test-date">Preferred Date</label>
+                                <input type="date" id="test-date">
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline cancel-btn">Cancel</button>
+                                <button type="submit" class="btn btn-primary submit-btn">Submit Request</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="js/medical-tests.js"></script>
+</body>
+</html>
